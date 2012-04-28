@@ -1,0 +1,21 @@
+{
+    "name": "diffbin"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "express": "2.5.5"
+    , "coffee-script": "1.2.0"
+    , "less": ">= 0.0.1"
+    , "jade": ">= 0.0.1"
+    , "connect-assets": ">= 2.1.9"
+    , "redis": "0.7.1"
+    , "node-shorty": ">= 1.0.0"
+  }
+  , "devDependencies": {
+
+  }
+  , "engines": {
+      "node": "0.6.x"
+      , "npm": "1.0.x"
+  }
+}

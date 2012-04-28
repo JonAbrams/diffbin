@@ -1,0 +1,15 @@
+!= js("entry")
+
+.container
+  .row
+    .span6
+      .entry
+        h4 Original text:
+        input#original_text(value=original_entry, readonly)
+    - if new_entry
+      .span6
+        .entry
+          h4 Edited text:
+          input#new_text(value=new_entry)
+        
+      a.go_back(href="/") <<< Make a fresh entry

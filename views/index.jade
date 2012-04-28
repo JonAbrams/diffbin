@@ -1,0 +1,21 @@
+!= js('index')
+
+.container
+  .row
+    .span6.offset3
+      .main
+        h1 diffbin
+        h3 Easily show to other people what changes you've made to their text. 
+        form#new_entry_form.form-inline.well(method="post", action="/")
+          p Enter the original text:
+          textarea.entry_text(name="text") Put your text here.
+          input.btn.btn-primary(type="submit", value="Get Started")
+        p.disclaimer Please note:
+          ul
+            li This is a free service so there are no service guarantees.
+            li We have no responsibility for the content hosted on this site. If you see something illegal, 
+              a(href="mailto:jon@jonabrams.com") let me know.
+            li Help improve this free service by contributing on github.
+        footer
+          | Copyright 2012 by
+          a(href="mailto:jon@jonabrams.com") Jon Abrams.
