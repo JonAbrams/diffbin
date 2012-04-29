@@ -1,11 +1,9 @@
-!= js('index')
-
 .container
   .row
     .span6.offset3
       .main
         h1 diffbin
-        h3 Easily show to other people what changes you've made to their text. 
+        h3 Easily show other people what changes you've made to their text. 
         form#new_entry_form.form-inline.well(method="post", action="/")
           p Enter the original text:
           textarea.entry_text(name="text") Put your text here.
@@ -19,3 +17,5 @@
         footer
           | Copyright 2012 by
           a(href="mailto:jon@jonabrams.com") Jon Abrams.
+
+!= js('index')

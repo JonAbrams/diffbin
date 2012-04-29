@@ -1,15 +1,19 @@
-!= js("entry")
-
 .container
-  .row
-    .span6
-      .entry
-        h4 Original text:
-        input#original_text(value=original_entry, readonly)
-    - if new_entry
+  form#new_entry_form(method="post", action="/"+slug)
+    .row
+      .span6
+        .entry
+          h4 Original text:
+          textarea#original_text(readonly)= original_entry
       .span6
         .entry
           h4 Edited text:
-          input#new_text(value=new_entry)
-        
-      a.go_back(href="/") <<< Make a fresh entry
+          textarea#new_text(name="new_text")= new_entry
+    .row
+      .span6.offset3
+        pre#changes
+      .span3
+        input#save_changes(type="submit", disabled, value="Save Changes").btn
+
+!= js("entry")
+!= js("jsdiff")
