@@ -18,7 +18,7 @@ $ ->
     $.post "/", $(this).serialize(), (results_raw) ->
       results = JSON.parse(results_raw)
       if typeof history.pushState isnt "undefined"
-        pushResult = history.pushState null, null, "#{results.url}"
+        pushResult = history.pushState null, null, results.url
         $('input#share_url').val results.url
       else
         location.href = "/#{results.url}"
