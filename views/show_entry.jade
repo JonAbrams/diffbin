@@ -1,19 +1,35 @@
-.container
-  form#new_entry_form(method="post", action="/"+slug)
-    .row
-      .span6
-        .entry
-          h4 Original text:
-          textarea#original_text(readonly)= original_entry
-      .span6
-        .entry
-          h4 Edited text:
-          textarea#new_text(name="new_text")= new_entry
-    .row
-      .span6.offset3
-        pre#changes
-      .span3
-        input#save_changes(type="submit", disabled, value="Save Changes").btn
-
-!= js("entry")
-!= js("jsdiff")
+!!!
+html
+  head
+    title diffbin | Like pastebin but _diff_erent
+    != css("main")
+    != js("jquery-1.7.2")
+    != js("jquery.zclip")
+    != js("entry")
+    != js("jsdiff")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
+    meta(name="description", content="Easily show to other people what changes you've made to their text. Change is good, share it.")
+    block head
+  body
+    .container
+      .main
+        h1 diffbin
+        h3 Easily show other people what changes you've made to their text.
+      form#entry_form(method="post", action="/")
+        .row
+          .span6
+            .entry
+              h4 Old Text:
+              textarea#old_text(name="old_text")= old_text
+          .span6
+            .entry
+              h4 New Text:
+              textarea#new_text(name="new_text")= new_text
+        .row
+          .span6.offset3
+            pre#changes
+          .span3
+            input#save_changes(type="submit", disabled, value="Save Changes").btn
+            .share_container.input-append
+              input#share_url(value=url, type="text")
+              button#copy.btn(type="button") Copy

@@ -5,7 +5,7 @@ app = module.exports = express.createServer()
 app.configure ->
   app.set "views", __dirname + "/views"
   app.set "view engine", "jade"
-  app.set 'view options', pretty: true
+  app.set 'view options', pretty: true, layout: false
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use express["static"](__dirname + "/public")
@@ -23,10 +23,8 @@ app.configure "development", ->
 app.configure "production", ->
   app.use express.errorHandler()
 
-app.get "/:original/:new", routes.diff.show
-app.get "/:original", routes.entry.show
-app.post "/:original", routes.diff.create
-app.get "/", routes.index
+app.get "/:original?", routes.entry.show
+app.get "/", routes.entry.show
 app.post "/", routes.entry.create
 
 port = process.env.PORT or 3000

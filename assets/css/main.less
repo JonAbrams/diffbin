@@ -1,20 +1,21 @@
 @import "bootstrap/bootstrap";
 @import "bootstrap/responsive";
 
-div.container {
+@delColour: red;
+@insColour: green;
+
+.container {
   margin-top:40px;
   
-  h1 {
-    margin-bottom:20px;
+  .main {
+    margin-bottom: 20px;
   }
   
-  form#new_entry_form {
-    margin-top:20px;
-    
+  form#new_entry_form {    
     textarea.entry_text {
       display:block;
-      width:100%;
-      max-width:100%;
+      width:98%;
+      max-width:98%;
       height:150px;
       margin-bottom:10px;
     }
@@ -22,10 +23,32 @@ div.container {
   
   pre#changes {
     font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    
+    del {
+      color: @delColour;
+    }
+    
+    ins {
+      color: @insColour;
+      text-decoration: none;
+    }
   }
 }
 
-div.entry {
+.share_container {
+  margin-top:10px;
+  width:220px;
+  #share_url {
+    width:158px;
+  }
+  
+  button#copy {
+    margin-left:-5px;
+    margin-top:-9px;
+  }
+}
+
+.entry {
   textarea {
     width:100%;
     height:250px;
