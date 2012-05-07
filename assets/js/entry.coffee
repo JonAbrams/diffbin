@@ -21,7 +21,7 @@ $ ->
         pushResult = history.pushState null, null, "#{results.url}"
         $('input#share_url').val results.url
       else
-        location.href = "/#{results.slug}"
+        location.href = "/#{results.url}"
   
   $("#copy.btn").on "click", ->
     $("input#share_url").select()
