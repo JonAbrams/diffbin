@@ -24,7 +24,6 @@ app.configure "production", ->
   app.use express.errorHandler()
 
 app.get "/:original?", routes.entry.show
-app.get "/", routes.entry.show
 app.post "/", routes.entry.create
 
 port = process.env.PORT or 3000
