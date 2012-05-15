@@ -33,7 +33,6 @@ $ ->
   $("textarea#new_text, textarea#old_text")
   .on("keyup", text_changed)
   .on("change", text_changed)
+  .on("paste", text_changed)
   
   text_changed()
-
-  
