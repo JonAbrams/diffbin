@@ -12,7 +12,7 @@ exports.entry = {}
 exports.entry.show = (req, res) ->
   root_url = "http://#{req.headers.host}"
   
-  slug = req.params.original
+  slug = req.params.slug
   
   if slug
     id = shorty.url_decode slug
@@ -23,9 +23,16 @@ exports.entry.show = (req, res) ->
       else
         old_text = new_text = ""
       redis_client.hincrby "entry-#{id}", "view_count", 1
-      res.render "show_entry", old_text: old_text, new_text: new_text, url: "#{root_url}/#{slug}"
+      res.render "show_entry", {
+        old_text
+        new_text
+        url: "#{root_url}/#{slug}"
+      }
   else
-    res.render "show_entry", old_text: "", new_text: "", url: root_url
+    res.render "show_entry",
+      old_text: "This area is for the original text"
+      new_text: "This area is for the modified text."
+      url: "#{root_url}"
 
 exports.entry.create = (req, res) ->
   root_url = "http://#{req.headers.host}"
@@ -39,6 +46,11 @@ exports.entry.create = (req, res) ->
   
   redis_client.incr "id_count", (err, id) ->
     slug = shorty.url_encode id
-    redis_client.hmset "entry-#{id}", {new_text: new_text, old_text: old_text, slug: slug, view_count: 0 }, (err, redis_result) ->
+    redis_client.hmset "entry-#{id}", {
+      new_text
+      old_text
+      slug
+      view_count: 0
+    }, (err, redis_result) ->
       res.write JSON.stringify err: "SUCCESS", url: "#{root_url}/#{slug}"
       res.end()

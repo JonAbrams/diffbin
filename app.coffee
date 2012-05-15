@@ -1,6 +1,6 @@
 express = require("express")
 routes = require("./routes")
-require('jade/lib/inline-tags').push('textarea'); # Fix whitespace issue in textareas
+require('jade/lib/inline-tags').push('textarea') # Fix whitespace issue in textareas
 app = module.exports = express.createServer()
 app.configure ->
   app.set "views", __dirname + "/views"
@@ -15,15 +15,14 @@ app.configure ->
   app.use express.session({ secret: "keyboard cat" })
 
 app.configure "development", ->
-  app.use express.errorHandler(
+  app.use express.errorHandler
     dumpExceptions: true
     showStack: true
-  )
 
 app.configure "production", ->
   app.use express.errorHandler()
 
-app.get "/:original?", routes.entry.show
+app.get "/:slug?", routes.entry.show
 app.post "/", routes.entry.create
 
 port = process.env.PORT or 3000
