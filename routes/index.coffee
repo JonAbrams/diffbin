@@ -30,7 +30,7 @@ exports.entry.show = (req, res) ->
       }
   else
     res.render "show_entry",
-      old_text: "This area is for the original text"
+      old_text: "This area is for the original text."
       new_text: "This area is for the modified text."
       url: "#{root_url}"
 
@@ -52,5 +52,5 @@ exports.entry.create = (req, res) ->
       slug
       view_count: 0
     }, (err, redis_result) ->
-      res.write JSON.stringify err: "SUCCESS", url: "#{root_url}/#{slug}"
+      res.write JSON.stringify err: "SUCCESS", slug: slug
       res.end()

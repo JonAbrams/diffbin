@@ -2,6 +2,7 @@ $ ->
   new_text = $('textarea#new_text')
   old_text = $('textarea#old_text')
   save_changes = $('input#save_changes')
+  share_url = $('input#share_url')
 
   text_changed = ->
     $('#changes').html diffString old_text.val(), new_text.val()
@@ -10,6 +11,20 @@ $ ->
     else
       save_changes.attr("disabled", false)
   
+  window.onpopstate = (event) ->
+    if event.state?
+      state = event.state
+      old_text.val state.old_text
+      new_text.val state.new_text
+      share_url.val "http://#{location.host}/#{state.slug}"
+  
+  # Store the state for the loaded page, if supported
+  history.replaceState? {
+    old_text: old_text.val()
+    new_text: new_text.val()
+    slug: location.pathname.replace("/", "")
+  }
+    
   $("form#entry_form").submit (event) ->
     event.preventDefault()
     new_text[0].defaultValue = new_text.val()
@@ -17,17 +32,22 @@ $ ->
     save_changes.attr("disabled", true)
     $.post "/", $(this).serialize(), (results_raw) ->
       results = JSON.parse(results_raw)
+      slug = results.slug
       if typeof history.pushState isnt "undefined"
-        pushResult = history.pushState null, null, results.url
-        $('input#share_url').val results.url
+        pushResult = history.pushState {
+          old_text: old_text.val()
+          new_text: new_text.val()
+          slug
+        }, null, slug
+        share_url.val "http://#{location.host}/#{slug}"
       else
-        location.href = "/#{results.url}"
+        location.href = "#{slug}"
   
   $("#copy.btn").on "click", ->
     $("input#share_url").select()
   .zclip
     path: 'ZeroClipboard.swf'
-    copy: -> $("input#share_url").val()
+    copy: -> share_url.val()
     afterCopy: ->
     
   $("textarea#new_text, textarea#old_text")
