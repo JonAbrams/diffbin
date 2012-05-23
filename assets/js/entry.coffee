@@ -23,15 +23,14 @@ $ ->
     old_text: old_text.val()
     new_text: new_text.val()
     slug: location.pathname.replace("/", "")
-  }
+  }, null, null
     
   $("form#entry_form").submit (event) ->
     event.preventDefault()
     new_text[0].defaultValue = new_text.val()
     old_text[0].defaultValue = old_text.val()
     save_changes.attr("disabled", true)
-    $.post "/", $(this).serialize(), (results_raw) ->
-      results = JSON.parse(results_raw)
+    $.post "/", $(this).serialize(), (results) ->
       slug = results.slug
       if typeof history.pushState isnt "undefined"
         pushResult = history.pushState {
@@ -42,6 +41,7 @@ $ ->
         share_url.val "http://#{location.host}/#{slug}"
       else
         location.href = "#{slug}"
+    , "json"
   
   $("#copy.btn").on "click", ->
     $("input#share_url").select()
