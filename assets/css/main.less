@@ -1,17 +1,14 @@
-@import "bootstrap/bootstrap";
-@import "bootstrap/responsive";
-
 @delColour: red;
 @insColour: green;
 
 .container {
   margin-top:40px;
-  
+
   .main {
     margin-bottom: 20px;
   }
-  
-  form#new_entry_form {    
+
+  form#new_entry_form {
     textarea.entry_text {
       display:block;
       width:98%;
@@ -20,14 +17,14 @@
       margin-bottom:10px;
     }
   }
-  
+
   pre#changes {
     font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
-    
+
     del {
       color: @delColour;
     }
-    
+
     ins {
       color: @insColour;
       text-decoration: none;
@@ -41,7 +38,7 @@
   #share_url {
     width:158px;
   }
-  
+
   button#copy {
     margin-left:-5px;
     margin-top:-9px;

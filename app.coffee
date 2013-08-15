@@ -1,7 +1,7 @@
 express = require("express")
 routes = require("./routes")
 require('jade/lib/inline-tags').push('textarea') # Fix whitespace issue in textareas
-app = module.exports = express.createServer()
+app = module.exports = express()
 app.configure ->
   app.set "views", __dirname + "/views"
   app.set "view engine", "jade"

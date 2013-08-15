@@ -10,21 +10,21 @@ $ ->
       save_changes.attr("disabled", true)
     else
       save_changes.attr("disabled", false)
-  
+
   window.onpopstate = (event) ->
     if event.state?
       state = event.state
       old_text.val state.old_text
       new_text.val state.new_text
       share_url.val "http://#{location.host}/#{state.slug}"
-  
+
   # Store the state for the loaded page, if supported
   history.replaceState? {
     old_text: old_text.val()
     new_text: new_text.val()
     slug: location.pathname.replace("/", "")
   }, null, null
-    
+
   $("form#entry_form").submit (event) ->
     event.preventDefault()
     new_text[0].defaultValue = new_text.val()
@@ -42,17 +42,17 @@ $ ->
       else
         location.href = "#{slug}"
     , "json"
-  
+
   $("#copy.btn").on "click", ->
     $("input#share_url").select()
   .zclip
     path: 'ZeroClipboard.swf'
     copy: -> share_url.val()
     afterCopy: ->
-    
+
   $("textarea#new_text, textarea#old_text")
   .on("keyup", text_changed)
   .on("change", text_changed)
   .on("paste", text_changed)
-  
+
   text_changed()
