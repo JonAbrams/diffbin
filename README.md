@@ -3,7 +3,8 @@ diffbin - Easily show other people what changes you've made to their text.
 
 I recently needed to share with a friend some suggested changes to some text she wrote. I didn't find any easy to use tools for that so I created this.
 
-See it in action here: [http://diffb.in/](http://www.diffb.in/)
+[See it in action here.](http://diffbin.herokuapp.com/)
+
 ## Features
 - No account needed.
 - Watch the diff get updated as you type.
